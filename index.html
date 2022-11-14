@@ -5,16 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/styles/reset.css" />
-    <link rel="stylesheet" href="./assets/styles/style.css" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Noto+Sans+Mono|Noto+Serif"
     />
+    <link rel="stylesheet" href="./assets/styles/style.css"/>
     <title>JS Fundamentals Quiz</title>
   </head>
   <body>
     <header class="header">
-      <button class="button" id="view-scores-btn">View High Scores</button>
+      <button class="button" id="view-scores-btn" href="/high-scores.html">View High Scores</button>
       <p class="timer">Time: <span id="timer-count"></span> sec</p>
     </header>
 
@@ -24,7 +24,7 @@
         <h2>Rules:</h2>
         <ol>
           <li>
-            1. You will have 75 seconds to answer 10 multiple choice questions.
+            1. You will have 75 seconds to answer 4 multiple choice questions.
           </li>
           <li>2. Incorrect answers penalize the time by 10 seconds.</li>
           <li>
@@ -34,7 +34,7 @@
         </ol>
         <h2>Good Luck!</h2>
       </div>
-      <div class="start-button">
+      <div class="button-container">
         <button class="button" id="start-btn">Start Quiz</button>
       </div>
     </div>
@@ -47,16 +47,16 @@
       </div>
 
       <div class="question-options">
-        <div class="option">
+        <div class="option" data-option-number="1">
           <p id="#option-1">Hyper Text Markup Language</p>
         </div>
-        <div class="option">
+        <div class="option" data-option-number="2">
           <p id="#option-2">Hyper Text Markup Language</p>
         </div>
-        <div class="option">
+        <div class="option" data-option-number="3">
           <p id="#option-3">Hyper Text Markup Language</p>
         </div>
-        <div class="option">
+        <div class="option" data-option-number="4">
           <p id="#option-4">Hyper Text Markup Language</p>
         </div>
       </div>
@@ -80,16 +80,9 @@
           <button class="button" id="save-score-btn">Save</button>
         </div>
       </div>
-      <div class="try-again-button">
+      <div class="button-container">
         <button class="button" id="try-again-btn">Try Again</button>
       </div>
-    </div>
-
-    <div class="high-scores">
-      <h2>High Scores</h2>
-      <ol id="high-scores-list"></ol>
-      <button class="button" id="home-btn">Home</button>
-      <button class="button" id="clear-scores-btn">Clear High Scores</button>
     </div>
 
     <footer class="page-footer">

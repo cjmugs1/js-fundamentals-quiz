@@ -26,6 +26,7 @@ body {
     box-sizing: border-box;
     position: relative;
     width: 75%;
+    height: 1vh;
     margin: 0 auto;
     background-color: var(--color-1);
 }
@@ -81,6 +82,11 @@ p{
     margin: 0 auto;
 }
 
+.button-container{
+    margin: 60px;
+    text-align: center;
+}
+
 
 /* HEADER */
 
@@ -120,15 +126,10 @@ header p{
     font-size: var(--text-font);
 }
 
-.start-screen .start-screen-info li{
+.start-screen .start-screen-info ol li{
     padding-top: 20px;
 }
 
-.start-screen .start-button{
-    display: flex;
-    justify-content: center;
-    margin: 60px;
-}
 
 
 /* QUIZ */
@@ -137,10 +138,10 @@ header p{
     padding: 20px;
     border-radius: 5px;
     background-color: #fff;
-    
+    display: none;
 }
 
-.quiz .question{
+.quiz .question p{
     margin-bottom: 30px;
     font-family: var(--title-font);
     font-size: var(--title-font-size);
@@ -172,6 +173,9 @@ header p{
 
 
 /* QUIZ RESULTS */
+.quiz-results{
+    display: none;
+}
 
 .quiz-results .results-info{
     max-width: 75%;
@@ -189,7 +193,18 @@ header p{
     display: flex;
 }
 
-.results-info .save-results button{
+.quiz-results .results-info .save-results textarea{
+    width: auto;
+    height: calc(var(--text-font-size) + 18px);
+    padding-top: 4px;
+    text-align: center;
+    font-family: var(--title-font);
+    font-size: var(--text-font-size);
+    text-transform: uppercase;
+    
+}
+
+.results-info .save-results .button{
     border: none;
     background-color: transparent;
     color: #000000;
@@ -198,24 +213,47 @@ header p{
     box-shadow: none;
 }
 
-.quiz-results .try-again-button{
-    width: 100%;
-    text-align: center;
+
+/* HIGH SCORES */
+
+.high-scores{
+    margin-top: 60px;
 }
 
+.high-scores h2{
+    font-size: var(--title-font-size);
+}
 
+.high-scores ol{
+    list-style-type: desc;
+    margin: 30px 0;
+    font-family: var(--title-font);
+    font-size: var(--text-font-size);
+}
+
+.high-scores ol li{
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--color-2-light);
+}
+
+.high-scores .button{
+    margin-right: 30px;
+}
 
 /* || FOOTER */
 
 .page-footer {
-    position: absolute;
-    bottom: 28px;
+    position: relative;
+    bottom: -30%;
+    padding-bottom: 30px;
     width: 100%;
     text-align: center;
 }
 
 .page-footer p{
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     font-family: var(--title-font);
 }
 
@@ -249,6 +287,3 @@ header .button:hover{
     background-color: var(--color-2-light);
 }
 
-.results-info .save-results button:hover{
-    color: var(--color-1)
-}
