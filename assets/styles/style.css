@@ -154,11 +154,17 @@ header p{
 .quiz .question-options .option{
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    /* padding: 10px; */
     margin-bottom: 20px;
     border: 1px solid;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.quiz .question-options .option p{
+    height: 100%;
+    width: 100%;
+    padding: 10px;
 }
 
 .quiz .quiz-footer{

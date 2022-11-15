@@ -16,7 +16,6 @@
 var header = document.querySelector(".header");
 var viewScoresBtn = document.querySelector("#view-scores-btn");
 var timerCount = document.querySelector("#timer-count");
-timerCount.textContent = startTime;
 
 // Start Screen
 var startScreen = document.querySelector(".start-screen");
@@ -26,13 +25,14 @@ var startBtn = startScreen.querySelector("#start-btn");
 var quizScreens = document.querySelector(".quiz");
 
 var quizQuestion = quizScreens.querySelector("#quiz-question");
+quizQuestion.dataset.questionIndex = "0"
 var currentQuestionNumber = quizQuestion.dataset.questionIndex
 
-var quizOptionBox = quizScreens.querySelectorAll(".option")
+var quizOptionBox = quizScreens.querySelector(".question-options")
 var quizOption1 = quizScreens.querySelector("#option-1");
-var quizOption2 = quizScreens.querySelector("#option-1");
-var quizOption3 = quizScreens.querySelector("#option-1");
-var quizOption4 = quizScreens.querySelector("#option-1");
+var quizOption2 = quizScreens.querySelector("#option-2");
+var quizOption3 = quizScreens.querySelector("#option-3");
+var quizOption4 = quizScreens.querySelector("#option-4");
 
 var userSelectionResult = document.querySelector("#user-selection-result");
 
@@ -47,8 +47,11 @@ var tryAgainBtn = quizResultsScreen.querySelector("#try-again-btn");
 
 
 // Create necessary global variables
-var startTime = 3;
+var startTime = "25";
+timerCount.textContent = startTime;
 var timeRemaining = parseInt(timerCount.textContent);
+var userScore = 0;
+
 
 // Make view scores button take you to high-scores page
 viewScoresBtn.addEventListener("click", function() {
@@ -69,7 +72,7 @@ function setTime() {
           // Stops execution of action at set interval
         clearInterval(timerInterval);
         // Resets value of timeRemaining
-        timeRemaining = startTime
+        timeRemaining = parseInt(startTime);
         //   Takes the user to the quiz results screen
         quizScreens.setAttribute("style", "display: none;");
         quizResultsScreen.setAttribute("style", "display: block;")
@@ -87,7 +90,8 @@ startBtn.addEventListener("click", function(){
     }, 500);
 
     setTimeout(setTime(), 500); 
-    setTimeout(createQuizScreen(), 500);                  
+    setTimeout(createQuizScreen(), 500);
+
 });
 
 
@@ -118,29 +122,50 @@ var quizData = [
 ]
 
 function createQuizScreen() {
- quizQuestion.textContent = quizData[currentQuestionNumber].question;
+    quizQuestion.textContent = quizData[currentQuestionNumber].question;
 
- for (i = 0; i <= quizData[currentQuestionNumber].answers.length; i++) {
+    quizOption1.textContent = quizData[currentQuestionNumber].answers[0];
+    quizOption2.textContent = quizData[currentQuestionNumber].answers[1];
+    quizOption3.textContent = quizData[currentQuestionNumber].answers[2];
+    quizOption4.textContent = quizData[currentQuestionNumber].answers[3];
 
+    // var correctAnswer = quizData[currentQuestionNumber].answers[quizData[currentQuestionNumber].correctAnswerIndex];
+    var correctAnswer = quizData[currentQuestionNumber].correctAnswerIndex;
 
- }
-
-
+    if (correctAnswer === 0) {
+        quizOption1.dataset.answerStatus = "correct";
+    } else if (correctAnswer === 1) {
+        quizOption2.dataset.answerStatus = "correct";
+    } else if (correctAnswer === 2) {
+        quizOption3.dataset.answerStatus = "correct";
+    } else if (correctAnswer === 3) {
+        quizOption4.dataset.answerStatus = "correct";
+    }
 
 }
 
+// function checkUserSelection(event) {
+//     var element = event.target
 
+// }
 // Set event listener for the quiz options, needs to check whether answer is correct or incorrect.
 // set background of clicked element, show the appropriate icon in the box, and set header footer
 // and remove time if necessary
 // then change the question number index and set timeout call the function that takes in the question number
 // index to change the values of the quiz question and options
-// quizOptionBox.addEventListener("click", function(event){
-//     var element = event.target;
+quizOptionBox.addEventListener("click", function(event){
+    var element = event.target;
+
+    element.style.backgroundColor = "#fcd9c3"
+
+    if (element.dataset.answerStatus === "correct") {
+        
+    }
+
+    console.log(element.dataset.answerStatus);
 
 
-
-// })
+})
 
 
 
