@@ -29,6 +29,7 @@ body {
     height: 1vh;
     margin: 0 auto;
     background-color: var(--color-1);
+    user-select: none;
 }
 
 h1{
@@ -149,7 +150,6 @@ header p{
 
 .quiz .question-options{
     border-bottom: 1px solid var(--color-1);
-    user-select: none;
 }
 
 .quiz .question-options .option{
@@ -175,7 +175,6 @@ header p{
 
 .quiz .quiz-footer p{
     transition: 0.1s ease-in;
-    /* display: none; */
 }
 
 

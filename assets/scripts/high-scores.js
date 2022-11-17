@@ -7,4 +7,5 @@ var clearScoresBtn = document.querySelector("#clear-scores-btn");
 // Make home button take you back to start screen
 homeBtn.addEventListener("click", function(){
     window.location.href="./index.html"
+    resetStartScreen();
 });

@@ -85,11 +85,19 @@ var userScore = 0;
 
 var quizScreenDelay = 500;
 
+// make a function which sets the variables back to their initialized values
+function resetVariables(){
+    timeRemaining = 50;
+    currentQuestionNumber = 0;
+    quizScreenDelay = 500;
+    userScore = 0;
+}
 
 // Make view scores button take you to high-scores page
 viewScoresBtn.addEventListener("click", function() {
     window.location.href="./high-scores.html";
 });
+
 
 // Create timer function
 function setTime() {
@@ -104,12 +112,16 @@ function setTime() {
         if(timeRemaining === 0 || currentQuestionNumber > quizData.length - 1) {
           // Stops execution of action at set interval
         clearInterval(timerInterval);
+        quizScreens.style.display = "none";
+        generateQuizResults();
+
         }
       }, 1000);
 }
 
 // Create event listener for start button, hide start screen show quiz screen.
 startBtn.addEventListener("click", function(){
+    resetVariables();
     setTimeout(function() {
         startScreen.style.display = "none";
         quizResultsScreen.style.display = "none";
@@ -126,12 +138,14 @@ startBtn.addEventListener("click", function(){
 
 function createQuizScreen() {
 
-
 // check if we have not exceeded the number of questions in our quizData array. if we have not, create
 // screen, otherwise, wait the delay time then go to the quiz results screen.
     if (currentQuestionNumber <= quizData.length - 1) {
 
+
     setTimeout(function(){
+        userSelectionResult.textContent = "";
+
         quizQuestion.textContent = quizData[currentQuestionNumber].question;
 
         quizOption1.style.backgroundColor = "#fff"
@@ -143,9 +157,10 @@ function createQuizScreen() {
         quizOption2.textContent = quizData[currentQuestionNumber].answers[1];
         quizOption3.textContent = quizData[currentQuestionNumber].answers[2];
         quizOption4.textContent = quizData[currentQuestionNumber].answers[3];
+
+        quizOptionBox.style.pointerEvents = "all";
     }, quizScreenDelay)
         
-
 
         var correctAnswer = quizData[currentQuestionNumber].correctAnswerIndex;
 
@@ -159,13 +174,13 @@ function createQuizScreen() {
             quizOption4.dataset.answerStatus = "correct";
         }
 
-        quizOptionBox.style.pointerEvents = "all";
 
         quizScreenDelay = 2000;
     } else {
         setTimeout(function(){
+            userSelectionResult.textContent = "";
             quizScreens.style.display = "none";
-        quizResultsScreen.style.display = "block";
+            generateQuizResults();
         }, quizScreenDelay)
     }
 }
@@ -202,37 +217,53 @@ quizOptionBox.addEventListener("click", function(event){
         setTimeout(function() {
             timerCount.style.color = "black";
         }, 500)
-        userSelectionResult.textContent = "Incorrect "
+        userSelectionResult.textContent = "Incorrect ";
         var incorrectIcon = document.createElement("i");
         incorrectIcon.classList.add("bi-x-circle");
         userSelectionResult.append(incorrectIcon);
         quizOptionBox.setAttribute("style", "pointer-events: none;")
     }
-    console.log(currentQuestionNumber);
     currentQuestionNumber += 1
-
     createQuizScreen();
 
 });
 
 
-function processScore(){
-
+function generateQuizResults(){
+    if( timeRemaining < 0) {
+        timerCount.textContent = "0";
+    }
+    quizResultsScreen.style.display = "block";
 }
 
 
-// Create event listener for try again button
-tryAgainBtn.addEventListener("click", function(){
-    setTimeout(function() {
-        timeRemaining = 50;
-        timerCount.textContent = timeRemaining;
+saveScoreBtn.addEventListener("click", function(){
+    var userInputInitials = userInitials.value
+    console.log(userInputInitials);
+    if (userInputInitials = ""){
+        window.alert("Please put in your initials!")
+    }
+    localStorage.setItem("userFinalScore", userScore)
+    localStorage.setItem("userSavedInitials", userInputInitials)
+    // window.location.href="./high-scores.html";
+
+});
+
+
+
+function resetStartScreen() {
+    timerCount.textContent = timeRemaining;
         timerCount.style.color = "";
-        quizScreenDelay = 500;
         quizResultsScreen.style.display = "none";
         startScreen.style.display = "block";
         viewScoresBtn.style.display = "";
         header.style.justifyContent = "";
-        
-        currentQuestionNumber = 0;
+}
+
+// Create event listener for try again button
+tryAgainBtn.addEventListener("click", function(){
+    setTimeout(function() {
+        resetVariables();
+        resetStartScreen();
     }, 500);
 });
