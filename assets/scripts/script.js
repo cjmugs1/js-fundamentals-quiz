@@ -150,7 +150,7 @@ function setTime() {
     }
 
     // if the time remaining is 0 or the user clicks the last question, stop the interval and show the results
-    if (timeRemaining === 0 || currentQuestionNumber > quizData.length - 1) {
+    if (timeRemaining <= 0 || currentQuestionNumber > quizData.length - 1) {
       clearInterval(timerInterval);
       quizScreens.style.display = "none";
       generateQuizResults();
