@@ -228,6 +228,7 @@ header p{
 
 .high-scores h2{
     font-size: var(--title-font-size);
+    margin-bottom: 20px;
 }
 
 .high-scores ol{
@@ -242,6 +243,7 @@ header p{
     padding: 10px;
     border-radius: 5px;
     background-color: var(--color-2-light);
+    text-transform: uppercase;
 }
 
 .high-scores .button{
