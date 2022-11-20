@@ -304,8 +304,8 @@ saveScoreBtn.addEventListener("click", function () {
     // save the array back to local storage
     localStorage.setItem("userScoreData", JSON.stringify(userScoreData));
     // show the high scores screen
-    window.location.href = "./high-scores.html";
   }
+  window.location.href = "./high-scores.html";
 });
 
 // resets the look of the start screen for when the buttons that take you to start are clicked
