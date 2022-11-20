@@ -289,6 +289,8 @@ function generateQuizResults() {
   finalScore.textContent = userScore;
 }
 
+console.log(localStorage.getItem("userScoreData") === null);
+
 // allows the user to save their score
 saveScoreBtn.addEventListener("click", function () {
     // trims the users input in the initials input box
@@ -296,9 +298,17 @@ saveScoreBtn.addEventListener("click", function () {
 //   if initials are blank, then require initials to save
   if (userInputInitials === "") {
     window.alert("Please put in your initials!");
-  } else {
-    // create a variable which gets an array from local storage
-    var userScoreData = JSON.parse(localStorage.getItem("userScoreData"));
+  } 
+  
+  // if this is the users first time doing the quiz, create the user data and add it to local storage
+  // the next time they do the quiz, we will just pull the saved data from local storage
+  if (localStorage.getItem("userScoreData") === null) {
+    var userScoreData = [];
+    userScoreData.push(userInputInitials + " - " + userScore);
+    localStorage.setItem("userScoreData", JSON.stringify(userScoreData));
+  } else{
+    // get the saved user data from local storage
+    userScoreData = JSON.parse(localStorage.getItem("userScoreData"));
     // push the user data into the array
     userScoreData.push(userInputInitials + " - " + userScore);
     // save the array back to local storage

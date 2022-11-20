@@ -21,7 +21,6 @@ function createHighScoresTable() {
   for (i = 0; i < storedUserScores.length; i++) {
     var savedUser = document.createElement("li");
     savedUser.textContent = storedUserScores[i];
-    console.log(savedUser.textContent);
     highScoresList.appendChild(savedUser);
   }
 }
